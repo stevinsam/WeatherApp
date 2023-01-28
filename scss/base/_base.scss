@@ -1,0 +1,60 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Oswald', sans-serif;
+    background-color: $background-color;
+    
+    background-image: url("../../dist/img/cloudy.jpg");
+    background-size: cover;
+    background-blend-mode: overlay;
+
+    font-size: 16px;
+    font-weight: bold;
+    color: $font-color;
+    @include mq(768px) {
+        font-size: 22px;
+    }
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    @include flexCenter;
+    flex-direction: column;
+    padding: 0.5rem;
+}
+
+main {
+    max-width: 700px;
+    max-height: 1024px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    background-color: $mask-color;
+
+    border: 1px solid $bordercolor;
+    border-radius: 40px;
+    box-shadow: 10px 10px $shadowcolor;
+}
+
+img {
+    display: block;
+}
+
+hr {
+    width: 90%;
+    margin: auto;
+    border: 1px solid $bordercolor;
+}
+
+.none {
+    display: none;
+}
+
+.block {
+    display: block;
+}

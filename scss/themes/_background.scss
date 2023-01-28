@@ -1,0 +1,24 @@
+.cloudy {
+    background-color: $background-color;
+    background-image: url("../../dist/img/cloudy.jpg");
+}
+
+.foggy {
+    background-color: $fog-color;
+    background-image: url("../../dist/img/foggy.jpg");
+}
+
+.night {
+    background-color: $night-color;
+    background-image: url("../../dist/img/night.jpg");
+}
+
+.rainy {
+    background-color: $background-color;
+    background-image: url("../../dist/img/rainy.jpg");
+}
+
+.snowy {
+    background-color: $background-color;
+    background-image: url("../../dist/img/snowy.jpg");
+}
