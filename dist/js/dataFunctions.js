@@ -1,4 +1,4 @@
-const { WEATHER_API_KEY } = process.env;
+const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
 
 export const setLocationObject = (locationObj, coordsObj) => {
     const { lat, lon, name, unit } = coordsObj;
