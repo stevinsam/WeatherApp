@@ -24,22 +24,21 @@ export const getWeatherFromCoords = async (locationObj) => {
     } */
     
     const urlDataObj = {
-        lat : locationObj.getLat(),
-        lon : locationObj.getLon(),
-        units : locationObj.getUnit(),
-    };
-    try {
-        const weatherStream = await fetch('./.netlify/functions/get_weather', {
-            method : "POST",
-            body : JSON.stringify(urlDataObj)
+        lat: locationObj.getLat(),
+        lon: locationObj.getLon(),
+        units: locationObj.getUnit()
+      };
+      try {
+        const weatherStream = await fetch("./.netlify/functions/get_weather", {
+          method: "POST",
+          body: JSON.stringify(urlDataObj)
         });
         const weatherJson = await weatherStream.json();
         return weatherJson;
-    } catch (err) {
+      } catch (err) {
         console.error(err);
-    }
-
-};
+      }
+    };
 
 export const getCoordsFromAPI = async (entryText, units) => {
    /*  const regex = /^\d+$/g;
@@ -57,18 +56,18 @@ export const getCoordsFromAPI = async (entryText, units) => {
     const urlDataObj = {
         text: entryText,
         units: units
-    };
-    try {
-        const dataStream = await fetch('./.netlify/functions/get_coords', {
-            method : "POST",
-            body : JSON.stringify(urlDataObj)
+      };
+      try {
+        const dataStream = await fetch("./.netlify/functions/get_coords", {
+          method: "POST",
+          body: JSON.stringify(urlDataObj)
         });
         const jsonData = await dataStream.json();
         return jsonData;
-    } catch (err) {
+      } catch (err) {
         console.error(err);
-    }
-};
+      }
+    };
 
 export const cleanInput = (text) => {
     const regex = / {2,}/g;
