@@ -1,5 +1,3 @@
-const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
-
 export const setLocationObject = (locationObj, coordsObj) => {
     const { lat, lon, name, unit } = coordsObj;
     locationObj.setLat(lat);
@@ -13,7 +11,7 @@ export const getHomeLocation = () => {
 };
 
 export const getWeatherFromCoords = async (locationObj) => {
-    const lat = locationObj.getLat();
+    /* const lat = locationObj.getLat();
     const lon = locationObj.getLon();
     const units = locationObj.getUnit();
     const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&units=${units}&appid=${WEATHER_API_KEY}`;
@@ -23,9 +21,9 @@ export const getWeatherFromCoords = async (locationObj) => {
         return weatherJson;
     } catch (err) {
         console.error(err);
-    }
+    } */
     
-   /*  const urlDataObj = {
+    const urlDataObj = {
         lat: locationObj.getLat(),
         lon: locationObj.getLon(),
         units: locationObj.getUnit()
@@ -39,11 +37,11 @@ export const getWeatherFromCoords = async (locationObj) => {
         return weatherJson;
       } catch (err) {
         console.error(err);
-      } */
+      }
     };
 
 export const getCoordsFromAPI = async (entryText, units) => {
-    const regex = /^\d+$/g;
+   /*  const regex = /^\d+$/g;
     const flag = regex.test(entryText) ? "zip" : "q";
     const url = `https://api.openweathermap.org/data/3.0/weather?${flag}=${entryText}&units=${units}&appid=${WEATHER_API_KEY}`;
     const encodedURL = encodeURI(url);
@@ -53,9 +51,9 @@ export const getCoordsFromAPI = async (entryText, units) => {
         return jsonData;
     } catch (err) {
         console.error(err.stack);
-    }
+    } */
 
-  /*   const urlDataObj = {
+    const urlDataObj = {
         text: entryText,
         units: units
       };
@@ -68,7 +66,7 @@ export const getCoordsFromAPI = async (entryText, units) => {
         return jsonData;
       } catch (err) {
         console.error(err);
-      } */
+      }
     };
 
 export const cleanInput = (text) => {
