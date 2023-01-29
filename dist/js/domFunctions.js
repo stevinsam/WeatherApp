@@ -241,7 +241,6 @@ const displayCurrentConditions = (currentConditionsArray) => {
 };
 
 const displaySixDayForecast = (weatherJson) => {
-    console.log(weatherJson);
   for (let i = 1; i <= 6; i++) {
     const wkfArray = createWeeklyForecastDivs(weatherJson.daily[i]);
     displayWeeklyForecast(wkfArray);
