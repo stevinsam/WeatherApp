@@ -57,8 +57,8 @@ export const updateDisplay = (weatherJson, locationObj) => {
     fadeDisplay();
     clearDisplay();
     
-    //const weatherClass = getWeatherClass(weatherJson.list.weather[0].icon);
-    const weatherClass = getWeatherClass(weatherJson.list.weather[0].icon);
+    //const weatherClass = getWeatherClass(weatherJson.list[1].weather[0].icon);
+    const weatherClass = getWeatherClass(weatherJson.list[1].weather[0].icon);
     setBGImage(weatherClass);
     const screenReaderWeather = buildScreenReaderWeather(weatherJson, locationObj);
     updateScreenReaderConfirmation(screenReaderWeather);
@@ -136,7 +136,7 @@ const buildScreenReaderWeather = (weatherJson, locationObj) => {
     const location = locationObj.getName();
     const unit = locationObj.getUnit();
     const tempUnit = unit === "metric" ? "Celsius" : "Fahrenheit";
-    return `${weatherJson.list.weather[0].desciption} and ${Math.round(Number(weatherJson.list.temp))}°${tempUnit} in ${location}`;
+    return `${weatherJson.list[1].weather[0].desciption} and ${Math.round(Number(weatherJson.list[1].temp))}°${tempUnit} in ${location}`;
 };
 
 const setFocusOnSearch = () => {
@@ -146,15 +146,15 @@ const setFocusOnSearch = () => {
 const createCurrentConditionsDivs = (weatherObj, unit) => {
     const tempUnit = unit === "metric" ? "C" : "F";
     const windUnit = unit === "metric" ? "m/s" : "mph";
-    const icon = createMainImgDiv(weatherObj.list.weather[0].icon, weatherObj.list.weather[0].desciption);
-    const temp = createElem("div", "temp", `${Math.round(Number(weatherObj.list.temp))}°`, tempUnit);
-    const properDesc = toProperCase(weatherObj.list.weather[0].desciption);
+    const icon = createMainImgDiv(weatherObj.list[1].weather[0].icon, weatherObj.list[1].weather[0].desciption);
+    const temp = createElem("div", "temp", `${Math.round(Number(weatherObj.list[1].temp))}°`, tempUnit);
+    const properDesc = toProperCase(weatherObj.list[1].weather[0].desciption);
     const desc = createElem("div", "desc", properDesc);
-    const feels = createElem("div", "feels", `Feels like ${Math.round(Number(weatherObj.list.feels_like))}°`);
+    const feels = createElem("div", "feels", `Feels like ${Math.round(Number(weatherObj.list[1].feels_like))}°`);
     const maxTemp = createElem("div", "maxtemp", `High of ${Math.round(Number(weatherObj.daily[0].temp.max))}°`);
     const minTemp = createElem("div", "mintemp", `Low of ${Math.round(Number(weatherObj.daily[0].temp.min))}°`);
-    const humidity = createElem("div", "humidity", `Humidity of ${Math.round(Number(weatherObj.list.humidity))}%`)
-    const wind = createElem("div", "wind", `Wind of ${Math.round(Number(weatherObj.list.wind_speed))} ${windUnit}`);
+    const humidity = createElem("div", "humidity", `Humidity of ${Math.round(Number(weatherObj.list[1].humidity))}%`)
+    const wind = createElem("div", "wind", `Wind of ${Math.round(Number(weatherObj.list[1].wind_speed))} ${windUnit}`);
     return [icon, temp, desc, feels, maxTemp, minTemp, humidity, wind];
 };
 
