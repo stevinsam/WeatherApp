@@ -7,7 +7,7 @@
 html {
   font-family: "Oswald", sans-serif;
   background-color: rgba(3, 56, 126, 0.911);
-  background-image: url("../../dist/img/cloudy.jpg");
+  background-image: url("../img/cloudy.jpg");
   background-size: cover;
   background-blend-mode: overlay;
   font-size: 16px;
