@@ -118,7 +118,7 @@ const getWeatherClass = (icon) => {
     if (weatherLookUp[firstTwoChars]) {
         weatherClass = weatherLookUp[firstTwoChars];
     } else if (lastChar === "d") {
-        weatherClass = "cloudy";
+        weatherClass = "clear";
     } else {
         weatherClass = "night";
     }
