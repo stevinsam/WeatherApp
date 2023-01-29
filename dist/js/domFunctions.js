@@ -104,10 +104,10 @@ const getWeatherClass = (icon) => {
     const firstTwoChars = icon.slice(0, 2);
     const lastChar = icon.slice(2);
     const weatherLookUp = {
-        // "01" : "clear",
-        // "02" : "cloudy", //"less cloudy",
-        // "03" : "cloudy",
-        // "04" : "cloudy", //"more cloudy",
+        "01" : "clear",
+        "02" : "cloudy", //"less cloudy",
+        "03" : "cloudy",
+        "04" : "cloudy", //"more cloudy",W
         "09" : "rainy", //"less rain",
         "10" : "rainy",
         "11" : "rainy", //"more rain",
