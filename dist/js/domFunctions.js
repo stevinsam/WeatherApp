@@ -27,17 +27,17 @@ export const displayAPIError = (statusCode) => {
 
 const toProperCase = (text) => {
     const words = text.split(" ");
-    const properWords = words.map(word => {
+    const properWords = words.map((word) => {
         return word.charAt(0).toUpperCase() + word.slice(1);
     });
     return properWords.join(" ");
-}
+};
 
 const updateWeatherLocationHeader = (message) => {
     const h1 = document.getElementById("currentForecast_location");
     if (message.indexOf("Lat:") !== -1 && message.indexOf("Long:") !== -1) {
         const msgArray = message.split(" ");
-        const mapArray = message.map(msg => {
+        const mapArray = msgArray.map(msg => {
             return msg.replace(":", ": ");
         })
         const lat = mapArray[0].indexOf("-") === -1 ? mapArray[0].slice(0, 10) : mapArray[0].slice(0, 11);
@@ -57,8 +57,8 @@ export const updateDisplay = (weatherJson, locationObj) => {
     fadeDisplay();
     clearDisplay();
     
-    //const weatherClass = getWeatherClass(weatherJson.list[1].weather[0].icon);
-    const weatherClass = getWeatherClass(weatherJson.list[1].weather[0].icon);
+    //const weatherClass = getWeatherClass(weatherJson.list[0].weather[0].icon);
+    const weatherClass = getWeatherClass(weatherJson.current.weather[0].icon);
     setBGImage(weatherClass);
     const screenReaderWeather = buildScreenReaderWeather(weatherJson, locationObj);
     updateScreenReaderConfirmation(screenReaderWeather);
@@ -66,6 +66,7 @@ export const updateDisplay = (weatherJson, locationObj) => {
 
     // Current Conditions
     const ccArray = createCurrentConditionsDivs(weatherJson, locationObj.getUnit());
+
     displayCurrentConditions(ccArray);
     // Weekly Forecast
     displaySixDayForecast(weatherJson);
@@ -86,7 +87,7 @@ const fadeDisplay = () => {
 };
 
 const clearDisplay = () => {
-    const currentConditions = document.getElementById("currentForecast_condtions");
+    const currentConditions = document.getElementById("currentForecast_conditions");
     deleteContents(currentConditions);
     const weeklyForecast = document.getElementById("weeklyForecast_contents");
     deleteContents(weeklyForecast);
@@ -136,7 +137,7 @@ const buildScreenReaderWeather = (weatherJson, locationObj) => {
     const location = locationObj.getName();
     const unit = locationObj.getUnit();
     const tempUnit = unit === "metric" ? "Celsius" : "Fahrenheit";
-    return `${weatherJson.list[1].weather[0].desciption} and ${Math.round(Number(weatherJson.list[1].temp))}°${tempUnit} in ${location}`;
+    return `${weatherJson.current.weather[0].desciption} and ${Math.round(Number(weatherJson.current.temp))}°${tempUnit} in ${location}`;
 };
 
 const setFocusOnSearch = () => {
@@ -146,15 +147,15 @@ const setFocusOnSearch = () => {
 const createCurrentConditionsDivs = (weatherObj, unit) => {
     const tempUnit = unit === "metric" ? "C" : "F";
     const windUnit = unit === "metric" ? "m/s" : "mph";
-    const icon = createMainImgDiv(weatherObj.list[1].weather[0].icon, weatherObj.list[1].weather[0].desciption);
-    const temp = createElem("div", "temp", `${Math.round(Number(weatherObj.list[1].temp))}°`, tempUnit);
-    const properDesc = toProperCase(weatherObj.list[1].weather[0].desciption);
-    const desc = createElem("div", "desc", properDesc);
-    const feels = createElem("div", "feels", `Feels like ${Math.round(Number(weatherObj.list[1].feels_like))}°`);
+    const icon = createMainImgDiv(weatherObj.current.weather[0].icon, weatherObj.current.weather[0].desciption);
+    const temp = createElem("div", "temp", `${Math.round(Number(weatherObj.current.temp))}°`, tempUnit);
+    // const properDesc = toProperCase(weatherObj.current.weather[0].desciption);
+    const desc = createElem("div", "desc", weatherObj.current.weather[0].desciption);
+    const feels = createElem("div", "feels", `Feels like ${Math.round(Number(weatherObj.current.feels_like))}°`);
     const maxTemp = createElem("div", "maxtemp", `High of ${Math.round(Number(weatherObj.daily[0].temp.max))}°`);
     const minTemp = createElem("div", "mintemp", `Low of ${Math.round(Number(weatherObj.daily[0].temp.min))}°`);
-    const humidity = createElem("div", "humidity", `Humidity of ${Math.round(Number(weatherObj.list[1].humidity))}%`)
-    const wind = createElem("div", "wind", `Wind of ${Math.round(Number(weatherObj.list[1].wind_speed))} ${windUnit}`);
+    const humidity = createElem("div", "humidity", `Humidity of ${Math.round(Number(weatherObj.current.humidity))}%`)
+    const wind = createElem("div", "wind", `Wind of ${Math.round(Number(weatherObj.current.wind_speed))} ${windUnit}`);
     return [icon, temp, desc, feels, maxTemp, minTemp, humidity, wind];
 };
 
@@ -235,12 +236,13 @@ const translateIconToFontAwesome = (icon) => {
 
 const displayCurrentConditions = (currentConditionsArray) => {
     const ccContainer = document.getElementById("currentForecast_conditions");
-    currentConditionsArray.forEach(cc => {
-        ccContainer.appendChild(cc);
+    currentConditionsArray.forEach((cc) => {
+      ccContainer.appendChild(cc);
     });
 };
 
 const displaySixDayForecast = (weatherJson) => {
+    console.log(weatherJson);
   for (let i = 1; i <= 6; i++) {
     const wkfArray = createWeeklyForecastDivs(weatherJson.daily[i]);
     displayWeeklyForecast(wkfArray);
@@ -258,7 +260,7 @@ const createWeeklyForecastDivs = (weekWeather) => {
 };
 
 const getDayAbb = (data) => {
-    const dateObj = new Data(data * 1000);
+    const dateObj = new Date(data * 1000);
     const utcString = dateObj.toUTCString();
     return utcString.slice(0, 3).toUpperCase();
 };
