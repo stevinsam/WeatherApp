@@ -148,8 +148,8 @@ const createCurrentConditionsDivs = (weatherObj, unit) => {
     const windUnit = unit === "metric" ? "m/s" : "mph";
     const icon = createMainImgDiv(weatherObj.current.weather[0].icon, weatherObj.current.weather[0].desciption);
     const temp = createElem("div", "temp", `${Math.round(Number(weatherObj.current.temp))}°`, tempUnit);
-    // const properDesc = toProperCase(weatherObj.current.weather[0].desciption);
-    const desc = createElem("div", "desc", weatherObj.current.weather[0].desciption);
+    const properDesc = toProperCase(weatherObj.current.weather[0].desciption);
+    const desc = createElem("div", "desc", properDesc);
     const feels = createElem("div", "feels", `Feels like ${Math.round(Number(weatherObj.current.feels_like))}°`);
     const maxTemp = createElem("div", "maxtemp", `High of ${Math.round(Number(weatherObj.daily[0].temp.max))}°`);
     const minTemp = createElem("div", "mintemp", `Low of ${Math.round(Number(weatherObj.daily[0].temp.min))}°`);
